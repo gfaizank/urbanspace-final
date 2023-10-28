@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+// import Snackbar from '@mui/material/Snackbar';
+// import MuiAlert from '@mui/material/Alert';
+
+// function Alert(props) {
+//   return <MuiAlert elevation={6} variant="filled" {...props} />;
+// }
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +15,10 @@ const Contact = () => {
     message: '',
   });
   const [responseMessage, setResponseMessage] = useState('');
+  // const [snackbarOpen, setSnackbarOpen] = useState(false);
+  // const [snackbarMessage, setSnackbarMessage] = useState('');
+  // const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,6 +34,10 @@ const Contact = () => {
 
       if (response.ok) {
         setResponseMessage('Message sent successfully.');
+
+        // setSnackbarSeverity('success');
+        // setSnackbarMessage('Message sent successfully.');
+
         // You can clear the form here if needed
         setFormData({
           firstName: '',
@@ -34,10 +48,16 @@ const Contact = () => {
         });
       } else {
         setResponseMessage('Failed to send the message. Please try again.');
+        // setSnackbarSeverity('error');
+        // setSnackbarMessage('Failed to send the message. Please try again.');
       }
+      // setSnackbarOpen(true);
     } catch (error) {
       console.error('Error sending the message:', error);
       setResponseMessage('An error occurred. Please try again later.');
+      // setSnackbarSeverity('error');
+      // setSnackbarMessage('An error occurred. Please try again later.');
+      // setSnackbarOpen(true);
     }
   };
 
@@ -156,6 +176,15 @@ const Contact = () => {
           </div>
         </div>
       </div>
+      {/* <Snackbar
+        open={snackbarOpen}
+        autoHideDuration={6000}
+        onClose={() => setSnackbarOpen(false)}
+      >
+        <Alert onClose={() => setSnackbarOpen(false)} severity={snackbarSeverity}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar> */}
     </div>
   );
 };

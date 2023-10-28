@@ -186,7 +186,7 @@ const Services = () => {
 
   const addToCart = async (service) => {
     await fetch(
-      "https://wm-backend.connecturbanspa.repl.co/client/gaurav456@gmail.com/addtocart",
+      "https://wm-backend.connecturbanspa.repl.co/client/gary@gmail.com/addtocart",
       {
         method: "PATCH",
         headers: {
@@ -213,7 +213,7 @@ const Services = () => {
 
   const getUnpaidList = async () => {
     await fetch(
-      "https://wm-backend.connecturbanspa.repl.co/client/ram@gmail.com/incartservices"
+      "https://wm-backend.connecturbanspa.repl.co/client/gary@gmail.com/incartservices"
     )
       .then((res) => res.json())
       .then((response) => {
@@ -227,7 +227,7 @@ const Services = () => {
 
   const removeFromCart = async (service) => {
     await fetch(
-      "https://wm-backend.connecturbanspa.repl.co/client/ram@gmail.com/removefromcart",
+      "https://wm-backend.connecturbanspa.repl.co/client/gary@gmail.com/removefromcart",
       {
         method: "DELETE",
         headers: {

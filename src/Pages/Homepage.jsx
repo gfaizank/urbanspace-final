@@ -10,25 +10,36 @@ import VideoCarousel from '../components/VideoCarousel';
 import MostBooked from '../components/MostBooked';
 import { useState,useEffect } from 'react';
 import { Link } from 'react-router-dom';
-
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LocalPhoneIcon from '@mui/icons-material/LocalPhone';
+import ClearIcon from '@mui/icons-material/Clear';
 import Banner from '../components/Banner';
 import Banner1Img from '../assets/banner1.jpeg';
 import Banner2Img from '../assets/banner2.jpeg'
 import MobileNavbar from '../components/MobileNavbar';
+import ClickOutside from "../components/ClickOutside";
 const Home = () => {
-  const [data,setData]=useState([]);
-  const [searchData,setSearchData]=useState([]);
-  const [searchQuery,setSearchQuery]=useState('')
-  
+  const [visible, setVisible] = useState(false);
+
+   const toggleText = () => {
+     setVisible((prev) => !prev);
+   };
+
+   const [data,setData]=useState([]);
+   const [searchData,setSearchData]=useState([]);
+   const [searchQuery,setSearchQuery]=useState('')
+
+   const clearSearch = () => {
+    setSearchQuery('');
+    setSearchData([]);
+  }
 
 
-const fetchReviews=async ()=>{
+
+ const fetchReviews=async ()=>{
     await fetch('https://wm-backend--connecturbanspa.repl.co/api/review') // Replace with your API endpoint
 .then((response) => response.json())
 .then(async(responseData) => {
-
 await setData(responseData.reviews);
 console.log(responseData.reviews)
 })
@@ -40,12 +51,10 @@ useEffect(()=>{
       fetchReviews();
 },[])
 
-
 const search=async (searchQuery)=>{
   await fetch(`https://wm-backend--connecturbanspa.repl.co/api/services?category=${searchQuery}`) // Replace with your API endpoint
 .then((response) => response.json())
 .then(async(responseData) => {
-
 await setSearchData(responseData.api_data);
 console.log(responseData.api_data)
 })
@@ -53,17 +62,16 @@ console.log(responseData.api_data)
 console.error('Error fetching data:', error);
 });
 }
-
 useEffect(()=>{
  if(searchQuery.length>0){
   search(searchQuery)
- }
-},[searchQuery])
+  }
+ },[searchQuery])
 
 
-    return (
-        <div>
-      <Navbar />
+     return (
+         <div>
+       <Navbar />
       {window.innerWidth<500?(
       <div style={{
         display:'flex',
@@ -87,7 +95,12 @@ useEffect(()=>{
           setSearchQuery(e.target.value)
         }}
         value={searchQuery}
-        ></input>
+        />
+        {searchQuery.length > 0 && (
+          <div className='bg-gray-100 rounded-full p-1 mt-1'>
+          <ClearIcon onClick={clearSearch} style={{ cursor: 'pointer', marginLeft: '1px' }} />
+        </div>
+          )}
        {
         searchData?.length<1 && searchQuery.length>0?(
           <div style={{
@@ -125,6 +138,7 @@ useEffect(()=>{
          </div>
         )
        }
+       
       </div>
       ):(
         <></>
@@ -154,7 +168,6 @@ useEffect(()=>{
         )
       }
       <Analytics />
-
       {
         window.innerWidth<500?(
           <div style={{
@@ -171,15 +184,28 @@ useEffect(()=>{
             {/* <p className=' text-customTwo p-3  '>Buy Products</p>
             <div className=' bg-customTwo h-0.5 w-40 ml-1 '></div> */}
         </div>
-          <Banner img={Banner2Img}></Banner>
+         
+          {/* <div className='flex items-center'>
+            <p className=' text-customTwo p-3  '>Buy Products</p>
+            <div className=' bg-customTwo h-0.5 w-40 ml-1 '></div>
+            <Banner img={Banner2Img}></Banner> */}
+            <div className='flex flex-col items-center'>
+  <div className='flex items-center'>
+    <p className='text-customTwo p-3'>Best Service</p>
+    <div className='bg-customTwo h-0.5 w-40 ml-1'></div>
+  </div>
+  <Banner img={Banner2Img}></Banner>
+</div>
+
+
+       
+            {/* </div> */}
           </div>
         ):(
           <></>
         )
       }
-
       <MostBooked />
-
       <Newsletter />
       {/* <Cards /> */}
       <div style={{
@@ -200,15 +226,14 @@ useEffect(()=>{
         </div>
       <Reviews users={data} interval={3000} ></Reviews>
       </div>
-
       <VideoCarousel />
-      
 
 
-      {/* <div style={{
-        position:"fixed",
-        right:10,
-        bottom:"15%",
+
+       {/* <div style={{
+         position:"fixed",
+         right:10,
+         bottom:"15%",
         display:'flex',
         flexDirection:'column'
       }}>
@@ -225,52 +250,52 @@ useEffect(()=>{
           background:'white'
         }}>
         <WhatsAppIcon fontSize='large' style={{
-           color:'#00df9a'
-        }}></WhatsAppIcon>
-        </div>
-      </div> */}
-      <div
-  style={{
-    position: "fixed",
-    right: 10,
-    bottom: "15%",
-    display: "flex",
-    flexDirection: "column",
-  }}
->
-  <a href="tel:8169943661" style={{ textDecoration: "none" }}>
-    <div
-      style={{
-        background: "white",
-        marginBottom: 5,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <LocalPhoneIcon fontSize="large" style={{ color: "#000" }}></LocalPhoneIcon>
-    </div>
-  </a>
-  <a
-    href="https://wa.me/8169943661"
-    style={{ textDecoration: "none" }}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    <div
-      style={{
-        background: "white",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <WhatsAppIcon fontSize="large" style={{ color: "#00df9a" }}></WhatsAppIcon>
-    </div>
-  </a>
-</div>
+            color:'#00df9a'
+         }}></WhatsAppIcon>
+         </div>
+       </div> */}
+       <div
+   style={{
+     position: "fixed",
+     right: 10,
+     bottom: "15%",
+     display: "flex",
+     flexDirection: "column",
+   }}
+ >
+   <a href="tel:8169943661" style={{ textDecoration: "none" }}>
+     <div
+       style={{
+         background: "white",
+         marginBottom: 5,
+         display: "flex",
+         alignItems: "center",
+         justifyContent: "center",
+       }}
+     >
+       <LocalPhoneIcon fontSize="large" style={{ color: "#000" }}></LocalPhoneIcon>
+     </div>
+   </a>
+   <a
+     href="https://wa.me/8169943661"
+     style={{ textDecoration: "none" }}
+     target="_blank"
+     rel="noopener noreferrer"
+   >
+     <div
+       style={{
+         background: "white",
+         display: "flex",
+         alignItems: "center",
+         justifyContent: "center",
+       }}
+     >
+       <WhatsAppIcon fontSize="large" style={{ color: "#00df9a" }}></WhatsAppIcon>
+     </div>
+   </a>
+ </div>
 
-      <Footer />
+       <Footer />
 
 
     
@@ -279,5 +304,4 @@ useEffect(()=>{
         </div>
     );
 }
-
 export default Home;

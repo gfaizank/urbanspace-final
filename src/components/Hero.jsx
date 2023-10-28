@@ -17,11 +17,11 @@ const Hero = () => {
         
         <div className='flex justify-center items-center'>
           <p className='md:text-4xl sm:text-4xl text-xl font-bold py-4'>
-            Fast, flexible financing for
+            Fast, flexible servicing for
           </p>
           <Typed
           className='md:text-4xl sm:text-4xl text-xl font-bold md:pl-4 pl-2'
-            strings={['BTB', 'BTC', 'SASS']}
+            strings={['AC', 'TV', 'RO']}
             typeSpeed={120}
             backSpeed={140}
             loop
