@@ -24,7 +24,7 @@ const Contact = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('https://wm-backend.connecturbanspa.repl.co/contactus', {
+      const response = await fetch('https://urban-space-backend.onrender.com/contactus', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

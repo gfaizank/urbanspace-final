@@ -12,7 +12,7 @@ const MostBooked = () => {
 
   useEffect(() => {
     // Fetch data from the API
-    fetch("https://wm-backend--connecturbanspa.repl.co/api/services")
+    fetch("https://urban-space-backend.onrender.com/api/services")
       .then((response) => response.json())
       .then((data) => {
         const filteredData = data.api_data.flatMap((subArray) =>

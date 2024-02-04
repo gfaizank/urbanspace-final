@@ -13,7 +13,7 @@ const Signup = () => {
   const signUp = async (e) => {
     e.preventDefault();
     console.log("FOrmdata", formData);
-    await fetch("https://wm-backend.connecturbanspa.repl.co/client/register", {
+    await fetch("https://0a9da474-98a0-46e7-a3cb-c13abf24b68d-00-26y694j7oumjm.asia-b.replit.dev/client/register", {
       method: "POST",
       credentials:'include',
       headers: {

@@ -56,7 +56,6 @@ const Services = () => {
   const handleCloseCart = () => {
     setCartOpen(false);
   };
-  
 
   const toggleOpen = (category) => {
     setIsOpen({
@@ -170,7 +169,7 @@ const Services = () => {
   ];
 
   const servicesFetch = async () => {
-    await fetch("https://wm-backend--connecturbanspa.repl.co/api/services") // Replace with your API endpoint
+    await fetch("https://urban-space-backend.onrender.com/api/services") // Replace with your API endpoint
       .then((response) => response.json())
       .then((responseData) => {
         setData(responseData.api_data);
@@ -186,7 +185,7 @@ const Services = () => {
 
   const addToCart = async (service) => {
     await fetch(
-      "https://wm-backend.connecturbanspa.repl.co/client/gary@gmail.com/addtocart",
+      "https://urban-space-backend.onrender.com/client/gary@gmail.com/addtocart",
       {
         method: "PATCH",
         headers: {
@@ -213,7 +212,7 @@ const Services = () => {
 
   const getUnpaidList = async () => {
     await fetch(
-      "https://wm-backend.connecturbanspa.repl.co/client/gary@gmail.com/incartservices"
+      "https://urban-space-backend.onrender.com/client/gary@gmail.com/incartservices"
     )
       .then((res) => res.json())
       .then((response) => {
@@ -227,7 +226,7 @@ const Services = () => {
 
   const removeFromCart = async (service) => {
     await fetch(
-      "https://wm-backend.connecturbanspa.repl.co/client/gary@gmail.com/removefromcart",
+      "https://urban-space-backend.onrender.com/client/gary@gmail.com/removefromcart",
       {
         method: "DELETE",
         headers: {
@@ -247,8 +246,6 @@ const Services = () => {
         console.log(error);
       });
   };
-
-
 
   return (
     <div className="container mx-auto p-4 bg-black text-white">
@@ -281,178 +278,183 @@ const Services = () => {
         ))}
       </div>
 
-      
       <Modal isOpen={openServiceDetails} onRequestClose={closeModal}>
-  <div
-    style={{
-      justifyContent: "flex-end",
-      display: "flex",
-      flexDirection: "column",  // Change to a column layout for small screens
-      padding: 0,
-    }}
-  >
-    <IconButton
-      onClick={() => {
-        setServiceDetails();
-      }}
-      style={{
-        marginLeft: "auto",  // Move the close button to the right
-      }}
-    >
-      <CloseIcon
-        fontSize="small"
-        color="white"
-        style={{
-          background: "black",
-          color: "#fff",
-          borderRadius: 50,
-          padding: 5,
-        }}
-      ></CloseIcon>
-    </IconButton>
-    {service?.map((service, index) => {
-      return (
-        <div>
-          <div
+        <div
+          style={{
+            justifyContent: "flex-end",
+            display: "flex",
+            flexDirection: "column", // Change to a column layout for small screens
+            padding: 0,
+          }}
+        >
+          <IconButton
+            onClick={() => {
+              setServiceDetails();
+            }}
             style={{
-              padding: 10,
-              display: "flex",
-              flexDirection: "column",  // Change to a column layout for small screens
-              borderBottom: "1px solid #D3D3D3",
+              marginLeft: "auto", // Move the close button to the right
             }}
           >
-            <h1
-              key={index}
+            <CloseIcon
+              fontSize="small"
+              color="white"
               style={{
-                fontSize: 20,
-                fontWeight: "600",
+                background: "black",
+                color: "#fff",
+                borderRadius: 50,
+                padding: 5,
               }}
-            >
-              {service?.service_title}
-            </h1>
-            <IconButton
-              onClick={() => {
-                setIsDescOpen(!isDescopen);
-              }}
-              style={{
-                marginLeft: "auto",  // Move the close button to the right
-              }}
-            >
-              <KeyboardArrowDownIcon
-                fontSize="small"
-                style={{
-                  background: "black",
-                  color: "white",
-                }}
-              ></KeyboardArrowDownIcon>
-            </IconButton>
-          </div>
-          <div>
-            {isDescopen ? (
-              <>
+            ></CloseIcon>
+          </IconButton>
+          {service?.map((service, index) => {
+            return (
+              <div>
                 <div
                   style={{
                     padding: 10,
                     display: "flex",
-                    flexDirection: "column",  // Change to a column layout for small screens
+                    flexDirection: "column", // Change to a column layout for small screens
+                    borderBottom: "1px solid #D3D3D3",
                   }}
                 >
-                  <div
+                  <h1
+                    key={index}
                     style={{
-                      display: "flex",
-                      flexDirection: "column",  // Change to a column layout for small screens
+                      fontSize: 20,
+                      fontWeight: "600",
                     }}
                   >
-                    <img
-                      style={{
-                        width: "100%",
-                        maxWidth: "500px",
-                      }}
-                      src={service?.service_img}
-                    ></img>
-                    <h2
-                      key={index}
-                      style={{
-                        marginLeft: "5px",
-                        marginRight: "5px",  // Add margin for better readability
-                      }}
-                    >
-                      {service?.service_desc}
-                    </h2>
-                  </div>
-                  <Button
-                    style={{
-                      width: "100%",  // Make the button full-width on small screens
-                      background: "black",
-                      color: "white",
-                      fontSize: 10,
-                    }}
+                    {service?.service_title}
+                  </h1>
+                  <IconButton
                     onClick={() => {
-                      addToCart(service);
-                      handleAddToCart();
-                      // toggleAddToCart(index);
-                    }} variant="contained" color="primary"
+                      setIsDescOpen(!isDescopen);
+                    }}
+                    style={{
+                      marginLeft: "auto", // Move the close button to the right
+                    }}
                   >
-                   {/* {addToCartLabels[index]} */}Add to Cart
-                  </Button>
-                  <Snackbar
-        anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-        open={cartOpen}
-        autoHideDuration={3000} // Adjust the duration as needed
-        onClose={handleCloseCart}
-        message={
-          <span style={{ display: "flex", alignItems: "center" }}>
-            <CheckIcon style={{ marginRight: "8px" }} />
-            Service added to cart!
-          </span>
-        }
-        action={
-          <IconButton
-            size="small"
-            aria-label="close"
-            color="inherit"
-            onClick={handleCloseCart}
-          >
-            <CloseIcon fontSize="small" />
-          </IconButton>
-        }
-      />
+                    <KeyboardArrowDownIcon
+                      fontSize="small"
+                      style={{
+                        background: "black",
+                        color: "white",
+                      }}
+                    ></KeyboardArrowDownIcon>
+                  </IconButton>
                 </div>
+                <div>
+                  {isDescopen ? (
+                    <>
+                      <div
+                        style={{
+                          padding: 10,
+                          display: "flex",
+                          flexDirection: "column", // Change to a column layout for small screens
+                        }}
+                      >
+                        <div
+                          style={{
+                            display: "flex",
+                            flexDirection: "column", // Change to a column layout for small screens
+                          }}
+                        >
+                          <img
+                            style={{
+                              width: "100%",
+                              maxWidth: "500px",
+                            }}
+                            src={service?.service_img}
+                          ></img>
+                          <h2
+                            key={index}
+                            style={{
+                              marginLeft: "5px",
+                              marginRight: "5px", // Add margin for better readability
+                            }}
+                          >
+                            {service?.service_desc}
+                          </h2>
+                        </div>
+                        <Button
+                          style={{
+                            width: "100%", // Make the button full-width on small screens
+                            background: "black",
+                            color: "white",
+                            fontSize: 10,
+                          }}
+                          onClick={() => {
+                            addToCart(service);
+                            handleAddToCart();
+                            // toggleAddToCart(index);
+                          }}
+                          variant="contained"
+                          color="primary"
+                        >
+                          {/* {addToCartLabels[index]} */}Add to Cart
+                        </Button>
+                        <Snackbar
+                          anchorOrigin={{
+                            vertical: "bottom",
+                            horizontal: "right",
+                          }}
+                          open={cartOpen}
+                          autoHideDuration={3000} // Adjust the duration as needed
+                          onClose={handleCloseCart}
+                          message={
+                            <span
+                              style={{ display: "flex", alignItems: "center" }}
+                            >
+                              <CheckIcon style={{ marginRight: "8px" }} />
+                              Service added to cart!
+                            </span>
+                          }
+                          action={
+                            <IconButton
+                              size="small"
+                              aria-label="close"
+                              color="inherit"
+                              onClick={handleCloseCart}
+                            >
+                              <CloseIcon fontSize="small" />
+                            </IconButton>
+                          }
+                        />
+                      </div>
 
-                <div
-                  style={{
-                    padding: 10,
-                  }}
-                >
-                  {service.isfixed ? (
-                    <h1
-                      style={{
-                        fontWeight: "600",
-                      }}
-                    >
-                      Price Rs {service.price}
-                    </h1>
+                      <div
+                        style={{
+                          padding: 10,
+                        }}
+                      >
+                        {service.isfixed ? (
+                          <h1
+                            style={{
+                              fontWeight: "600",
+                            }}
+                          >
+                            Price Rs {service.price}
+                          </h1>
+                        ) : (
+                          <h1
+                            style={{
+                              fontWeight: "600",
+                            }}
+                          >
+                            Starts From Rs {service.price}
+                          </h1>
+                        )}
+                      </div>
+                    </>
                   ) : (
-                    <h1
-                      style={{
-                        fontWeight: "600",
-                      }}
-                    >
-                      Starts From Rs {service.price}
-                    </h1>
+                    <></>
                   )}
                 </div>
-              </>
-            ) : (
-              <></>
-            )}
-          </div>
+              </div>
+            );
+          })}
         </div>
-      );
-    })}
-  </div>
-</Modal>
-
+      </Modal>
 
       {/* Carousel section */}
       <div className="mt-8">

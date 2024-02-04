@@ -37,7 +37,7 @@ const Home = () => {
 
 
  const fetchReviews=async ()=>{
-    await fetch('https://wm-backend--connecturbanspa.repl.co/api/review') // Replace with your API endpoint
+    await fetch('https://urban-space-backend.onrender.com/api/review') // Replace with your API endpoint
 .then((response) => response.json())
 .then(async(responseData) => {
 await setData(responseData.reviews);
@@ -52,7 +52,7 @@ useEffect(()=>{
 },[])
 
 const search=async (searchQuery)=>{
-  await fetch(`https://wm-backend--connecturbanspa.repl.co/api/services?category=${searchQuery}`) // Replace with your API endpoint
+  await fetch(`https://urban-space-backend.onrender.com/api/services?category=${searchQuery}`) // Replace with your API endpoint
 .then((response) => response.json())
 .then(async(responseData) => {
 await setSearchData(responseData.api_data);
@@ -157,7 +157,7 @@ useEffect(()=>{
             marginBottom:20
           }}>
             <div className='flex items-center'>
-            <p className=' text-customTwo p-3  '>Buy Products</p>
+            <p className=' text-customTwo p-3 ml-3 '>Buy Products</p>
             <div className=' bg-customTwo h-0.5 w-40 ml-1 '></div>
         </div>
             

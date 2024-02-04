@@ -11,7 +11,7 @@ import React, { useEffect } from "react";
 
    const login = async (e) => {
      e.preventDefault();
-     await fetch("https://wm-backend.connecturbanspa.repl.co/client/login", {
+     await fetch("https://urban-space-backend.onrender.com/client/login", {
        method: "POST",
        credentials:'include',
        headers: {
@@ -38,7 +38,7 @@ import React, { useEffect } from "react";
 
    const getLogin = async () => {
      // e.preventDefault();
-     await fetch("https://wm-backend.connecturbanspa.repl.co/client/getlogin", {
+     await fetch("https://urban-space-backend.onrender.com/client/getlogin", {
      })
        .then((res) => res.json())
        .then((response) => {

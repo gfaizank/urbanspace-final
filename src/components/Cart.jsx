@@ -9,7 +9,7 @@ import React from "react";
 
    const getpaidList = async () => {
      await fetch(
-       "https://wm-backend.connecturbanspa.repl.co/client/gary@gmail.com/incartservices"
+       "https://urban-space-backend.onrender.com/client/gary@gmail.com/incartservices"
      )
        .then((res) => res.json())
        .then((response) => {
@@ -32,7 +32,7 @@ import React from "react";
 
    const removeFromCart = async (service) => {
      await fetch(
-       "https://wm-backend.connecturbanspa.repl.co/client/gary@gmail.com/removefromcart",
+       "https://urban-space-backend.onrender.com/client/gary@gmail.com/removefromcart",
        {
          method: "DELETE",
          headers: {
@@ -136,6 +136,8 @@ import React from "react";
          </div>
        </div>
        <div className="h-20" /> {/* Adjust the height as needed */}
+
+       
      </div>
    );
  }

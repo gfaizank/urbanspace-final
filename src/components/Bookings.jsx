@@ -5,7 +5,7 @@ function Bookings() {
 
   const getpaidList = async () => {
     await fetch(
-      "https://wm-backend.connecturbanspa.repl.co/client/gary@gmail.com/incartservices"
+      "https://urban-space-backend.onrender.com/client/gary@gmail.com/incartservices"
     )
       .then((res) => res.json())
       .then((response) => {

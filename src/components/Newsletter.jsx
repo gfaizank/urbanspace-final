@@ -17,7 +17,7 @@ const Newsletter = () => {
 
 
   const subscribe = async () => { 
-   await fetch('https://wm-backend.connecturbanspa.repl.co/subscribe', {
+   await fetch('https://urban-space-backend.onrender.com/subscribe', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
